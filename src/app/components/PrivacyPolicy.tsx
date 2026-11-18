@@ -7,7 +7,7 @@ interface PrivacyPolicyProps {
 
 export function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
   return (
-    <div className="min-h-screen bg-[#e8ddd3] px-6 py-12">
+    <div className="min-h-dvh bg-[#e8ddd3] px-6 py-12">
       <div className="max-w-[800px] mx-auto">
         {/* Back Button */}
         <Button

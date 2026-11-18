@@ -184,7 +184,7 @@ export function SubscriptionDetailPage({
   };
 
   return (
-    <div className="min-h-screen pb-8" style={{ backgroundColor: isDarkMode ? '#76625E' : '#E8E1D9' }}>
+    <div className="min-h-dvh pb-8" style={{ backgroundColor: isDarkMode ? '#76625E' : '#E8E1D9' }}>
       <style>{`
         .neuro-card {
           background: ${isDarkMode ? '#8A786F' : '#F3ECE4'};

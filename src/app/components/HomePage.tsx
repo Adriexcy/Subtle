@@ -176,19 +176,29 @@ export function HomePage({
     e.stopPropagation();
     const rect = (e.target as HTMLElement).getBoundingClientRect();
     const windowWidth = window.innerWidth;
-    const pickerWidth = 280; // approximate width of the picker
-    
-    // Calculate x position - if too close to right edge, shift left
+    const windowHeight = window.innerHeight;
+    const pickerWidth = Math.min(280, windowWidth - 32);
+    const pickerHeight = 220; // approximate height of the picker
+    const bottomNavSpace = 100; // keep clear of the fixed bottom navigation
+
+    // Keep the picker fully on screen horizontally
     let xPos = rect.left;
-    if (xPos + pickerWidth > windowWidth) {
-      xPos = windowWidth - pickerWidth - 20;
+    if (xPos + pickerWidth > windowWidth - 16) {
+      xPos = windowWidth - pickerWidth - 16;
     }
-    
+    xPos = Math.max(16, xPos);
+
+    // Open above the dot if there isn't room below it
+    let yPos = rect.bottom + 8;
+    if (yPos + pickerHeight > windowHeight - bottomNavSpace) {
+      yPos = Math.max(16, rect.top - pickerHeight - 8);
+    }
+
     setMiniColorPicker({
       show: true,
       category,
       x: xPos,
-      y: rect.bottom + 8
+      y: yPos
     });
   };
 
@@ -508,7 +518,7 @@ export function HomePage({
   );
 
   return (
-    <div className="min-h-screen pb-24" style={{ backgroundColor: isDarkMode ? '#76625E' : '#E8E1D9' }}>
+    <div className="min-h-dvh pb-32" style={{ backgroundColor: isDarkMode ? '#76625E' : '#E8E1D9' }}>
       <style>{`
         .neuro-card {
           background: ${isDarkMode ? '#8A786F' : '#F3ECE4'};
@@ -778,7 +788,7 @@ export function HomePage({
               left: `${miniColorPicker.x}px`, 
               top: `${miniColorPicker.y}px`,
               background: isDarkMode ? '#8A786F' : '#F3ECE4',
-              width: '280px'
+              width: 'min(280px, calc(100vw - 32px))'
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -824,7 +834,7 @@ export function HomePage({
       )}
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 neuro-card mx-4 mb-4 px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 neuro-card mx-4 px-6 py-4" style={{ marginBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <div className="flex justify-between items-center max-w-2xl mx-auto">
           {navItems.map((item) => {
             const isActive = currentPage === item.name;

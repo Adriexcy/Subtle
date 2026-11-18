@@ -102,7 +102,7 @@ export function LoginPage({ onLogin, onNavigateToPrivacy, onNavigateToTerms, onN
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#E8E1D9' }}>
+    <div className="min-h-dvh flex items-center justify-center p-4" style={{ backgroundColor: '#E8E1D9' }}>
       <style>{`
         .neuro-text {
           color: #6A5E55;
