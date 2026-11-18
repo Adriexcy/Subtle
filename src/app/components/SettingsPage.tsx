@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight, User, Bell, Palette, Shield, HelpCircle, LogOut, X, Check, Moon, Sun, Mail, Phone, Calendar as CalendarIcon } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface SettingsPageProps {
   username: string;
